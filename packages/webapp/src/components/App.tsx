@@ -43,7 +43,6 @@ const App: FC = () => {
             <ErrorBoundary FallbackComponent={Fallback}>
               <Routes>
                 <Route path="/*" element={<Main />}>
-                  <Route path="login" element={<LoginPage />} />
                   <Route path="app" element={<HomePage />}>
                     <Route
                       element={<RecordingRoute />}
@@ -55,6 +54,8 @@ const App: FC = () => {
                       path="server/:serverId/*"
                     />
                   </Route>
+                  <Route path="login" element={<LoginPage />} />
+                  <Route path="*" element={<LoginPage />} />
                 </Route>
               </Routes>
             </ErrorBoundary>

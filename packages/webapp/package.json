@@ -7,8 +7,7 @@
     "start": "vite preview",
     "build": "yarn build:monocle && yarn build:alienfence",
     "build:monocle": "NODE_ENV=production yarn vite build --mode monocle",
-    "build:alienfence": "NODE_ENV=production yarn vite build --mode alienfence",
-    "eject": "react-scripts eject"
+    "build:alienfence": "NODE_ENV=production yarn vite build --mode alienfence"
   },
   "browserslist": {
     "production": [
