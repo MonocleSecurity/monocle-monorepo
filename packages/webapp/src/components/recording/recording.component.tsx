@@ -17,6 +17,8 @@ import { getClient } from "../../services/monocle";
 import { RecordingTimeline } from "./recording-timeline.component";
 import { WebRTC, WebRTCOptions } from "./webrtc-class";
 
+const SHOW_TIMELINE = import.meta.env.VITE_FEATURE_TIMELINE === "true"
+
 export const Recording: FC<
   PropsWithChildren<{ recordingToken: string | number }>
 > = ({ recordingToken }) => {
@@ -87,7 +89,7 @@ export const Recording: FC<
     <div
       ref={divRef}
       id="video"
-      style={{ height: "calc(100% - 36px)" }}
+      style={{ height: SHOW_TIMELINE ? `calc(100% - 36px)` : "100%" }}
       className="dark:bg-code-900 bg-white dark:text-white w-full h-full flex flex-1 flex-col"
     >
       <video
@@ -96,15 +98,17 @@ export const Recording: FC<
         muted
         controls={true}
         style={{
-          height: `${height - TIMELINE_HEIGHT}px`,
+          height: `${height - (SHOW_TIMELINE ? TIMELINE_HEIGHT : 0)}px`,
           width: `${width}px`,
         }}
         className="object-contain dark:bg-code-900 bg-white transition-opacity duration-300 opacity-0 flex grow"
       />
-      <RecordingTimeline
-        onChangeTime={handleRequestedTime}
-        recordingToken={recordingToken}
-      />
+      {import.meta.env.VITE_FEATURE_TIMELINE === "true" && (
+        <RecordingTimeline
+          onChangeTime={handleRequestedTime}
+          recordingToken={recordingToken}
+        />
+      )}
     </div>
   );
 };
